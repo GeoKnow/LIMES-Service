@@ -25,6 +25,10 @@
     <servlet-name>LimesReview</servlet-name>
     <servlet-class>LimesReview</servlet-class>
    </servlet>
+   <servlet>
+    <servlet-name>LoadFile</servlet-name>
+    <servlet-class>LoadFile</servlet-class>
+   </servlet>
    <servlet-mapping>
    <servlet-name>LimesRun</servlet-name>
    <url-pattern>/LimesRun</url-pattern>
@@ -32,5 +36,9 @@
    <servlet-mapping>
    <servlet-name>LimesReview</servlet-name>
    <url-pattern>/LimesReview</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>LoadFile</servlet-name>
+   <url-pattern>/LoadFile</url-pattern>
    </servlet-mapping>
 </web-app>

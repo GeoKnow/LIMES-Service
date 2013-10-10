@@ -1,36 +1,15 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFReader;
-import com.hp.hpl.jena.rdf.model.RDFWriter;
-import com.hp.hpl.jena.util.FileManager;
 
-import de.uni_leipzig.simba.controller.Controller;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class LIMESERVE
@@ -48,7 +27,6 @@ public class LimesReview extends HttpServlet {
 	   
 
 	   public void init( ){
-		  System.setProperty("file.encoding","UTF-8");
 	      filePath = getServletContext().getRealPath("/");
 	      System.out.println(filePath);
 	   }
@@ -67,13 +45,23 @@ public class LimesReview extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	 Model model = ModelFactory.createDefaultModel();
+    	 Model mod0 = ModelFactory.createDefaultModel();
+    	 Model mod1 = ModelFactory.createDefaultModel();
 
-	   	 RDFReader r = model.getReader( "N-TRIPLE");
-	   	 r.read( model, "file:///"+filePath+"result\\reviewme.nt" );
+	   	 RDFReader r0 = mod0.getReader( "N-TRIPLE");
+	   	 r0.read( mod0, "file:///"+filePath+"result\\reviewme.nt" );
+	   	 RDFReader r1 = mod1.getReader( "N-TRIPLE");
+	   	 r1.read(mod1, "file:///"+filePath+"result\\accepted.nt");
 	   	 
-	   	 PrintWriter out = response.getWriter();
-	   	 System.out.println(model);
-	     model.write(out, "N-TRIPLE");
+	   	 //mod0.add(mod1);
+	   	 String[] modArray = new String[2];
+	   	 modArray[0] = mod0.toString();
+	   	 modArray[1] = mod1.toString();
+	     
+	     Gson gson = new Gson();
+	     String json = gson.toJson(modArray);
+	     response.setContentType("application/json");
+	     response.setCharacterEncoding("UTF-8");
+	     response.getWriter().write(json);
     	}
 }

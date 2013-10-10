@@ -54,7 +54,6 @@ public class LimesRun extends HttpServlet {
 	   
 
 	   public void init( ){
-		   System.setProperty("file.encoding","UTF-8");
 	      filePath = getServletContext().getRealPath("/");
 	      configFile = filePath+"/config/config.xml";
 	  	  configTemplate = filePath+"/config/default.xml";

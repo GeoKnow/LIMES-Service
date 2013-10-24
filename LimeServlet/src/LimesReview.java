@@ -28,7 +28,7 @@ public class LimesReview extends HttpServlet {
 
 	   public void init( ){
 	      filePath = getServletContext().getRealPath("/");
-	      System.out.println(filePath);
+	      //System.out.println(filePath);
 	   }
 
 	/**

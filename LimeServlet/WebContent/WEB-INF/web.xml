@@ -11,7 +11,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>LimeServlet</servlet-name>
-    <servlet-class>LimeServlet</servlet-class>
+    <servlet-class>LimesRun</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LimeServlet</servlet-name>

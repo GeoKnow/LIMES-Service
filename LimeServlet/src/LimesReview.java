@@ -48,7 +48,7 @@ public class LimesReview extends HttpServlet {
     	 Model mod0 = ModelFactory.createDefaultModel();
     	 Model mod1 = ModelFactory.createDefaultModel();
 
-	   	 RDFReader r0 = mod0.getReader( "N-TRIPLE");
+	   	 RDFReader r0 = mod0.getReader( "N-TRIPLE" );
 	   	 r0.read( mod0, "file:///"+filePath+"result\\reviewme.nt" );
 	   	 RDFReader r1 = mod1.getReader( "N-TRIPLE");
 	   	 r1.read(mod1, "file:///"+filePath+"result\\accepted.nt");

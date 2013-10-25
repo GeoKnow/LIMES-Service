@@ -73,6 +73,7 @@ public class LimesRun extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	response.setHeader("Access-Control-Allow-Origin", "*");
     	source[1] = request.getParameter("SourceServiceURI");
     	target[1] = request.getParameter("TargetServiceURI");
     	source[2] = request.getParameter("SourceVar");
@@ -224,6 +225,7 @@ public class LimesRun extends HttpServlet {
     
     // Start LIMES with the configfile
  	public static void executeLimes(String configFile){
+ 		System.out.println(configFile);
  		Controller.run(configFile);
  	}
 

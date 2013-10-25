@@ -33,6 +33,7 @@ public class LoadFile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	 response.setHeader("Access-Control-Allow-Origin", "*");
     	 String filePath = request.getSession().getServletContext().getRealPath("/");
     	 filePath = filePath.replace("LimeServlet\\", "");
     	 configFile = filePath+"generator\\uploads\\"+request.getParameter("file");

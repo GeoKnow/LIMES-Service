@@ -45,6 +45,7 @@ public class LimesReview extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	 response.setHeader("Access-Control-Allow-Origin", "*");
     	 Model mod0 = ModelFactory.createDefaultModel();
     	 Model mod1 = ModelFactory.createDefaultModel();
 

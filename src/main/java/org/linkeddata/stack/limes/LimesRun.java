@@ -1,3 +1,5 @@
+package org.linkeddata.stack.limes;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +30,7 @@ import de.uni_leipzig.simba.controller.Controller;
  */
 public class LimesRun extends HttpServlet {
 	
+	
 	private static final long serialVersionUID = 1L;
 	private static String filePath;
 	
@@ -54,15 +57,16 @@ public class LimesRun extends HttpServlet {
 	   
 
 	   public void init( ){
-	      filePath = getServletContext().getRealPath("/");
-	      configFile = filePath+"/config/config.xml";
-	  	  configTemplate = filePath+"/config/default.xml";
+	      filePath = getServletContext().getRealPath(File.separator);
+	      configFile = filePath+"config"+File.separator+"config.xml";
+	  	  configTemplate = filePath+"config"+File.separator+"default.xml";
 	   }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
     	response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<HTML><HEAD><TITLE>Hello World!</TITLE>"
@@ -73,7 +77,9 @@ public class LimesRun extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
     	response.setHeader("Access-Control-Allow-Origin", "*");
+    	
     	source[1] = request.getParameter("SourceServiceURI");
     	target[1] = request.getParameter("TargetServiceURI");
     	source[2] = request.getParameter("SourceVar");
@@ -106,7 +112,7 @@ public class LimesRun extends HttpServlet {
 			  // create doc
 			  Document doc = docBuilder.newDocument();
 			  DOMImplementation domImpl = doc.getImplementation();
-			  DocumentType doctype = domImpl.createDocumentType("LIMES_SYSTEM", null, filePath+"\\config\\limes.dtd");
+			  DocumentType doctype = domImpl.createDocumentType("LIMES_SYSTEM", null, filePath+"config"+File.separator+"limes.dtd");
 			  doc.appendChild(doctype);
 			  Element limes = doc.createElement("LIMES");
 			  doc.appendChild(limes);

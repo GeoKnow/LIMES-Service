@@ -1,3 +1,5 @@
+package org.linkeddata.stack.limes;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -33,10 +35,13 @@ public class LoadFile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	 
     	 response.setHeader("Access-Control-Allow-Origin", "*");
+    	 
     	 String filePath = request.getSession().getServletContext().getRealPath("/");
     	 filePath = filePath.replace("LimeServlet\\", "");
-    	 configFile = filePath+"generator\\uploads\\"+request.getParameter("file");
+    	 configFile = filePath+"generator"+File.separator+"uploads"+File.separator+request.getParameter("file");
+    	 System.out.println("LoadFile: " + configFile);
     	 readConfig(configFile);
     	 
     	 Gson gson = new Gson();

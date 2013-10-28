@@ -56,11 +56,17 @@ public class LimesRun extends HttpServlet {
 	static String[] review = {"", "", ""};
 	   
 
-	   public void init( ){
-	      filePath = getServletContext().getRealPath(File.separator);
-	      configFile = filePath+"config"+File.separator+"config.xml";
-	  	  configTemplate = filePath+"config"+File.separator+"default.xml";
-	   }
+    public void init( ){
+      filePath = getServletContext().getRealPath(File.separator);
+      configFile = filePath+"config"+File.separator+"config.xml";
+  	  configTemplate = filePath+"config"+File.separator+"default.xml";
+  	  
+  	  File resultDir = new File(filePath + "result");
+      if (!resultDir.exists()) {
+    	  resultDir.mkdirs();
+      }
+      
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -79,7 +85,7 @@ public class LimesRun extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	response.setHeader("Access-Control-Allow-Origin", "*");
-    	
+              
     	source[1] = request.getParameter("SourceServiceURI");
     	target[1] = request.getParameter("TargetServiceURI");
     	source[2] = request.getParameter("SourceVar");

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>war</packaging>
 
-  <name>limes-service</name>
+  <name>Limes-Service</name>
   <groupId>stack.linkeddata.org</groupId>
   <artifactId>limes-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>

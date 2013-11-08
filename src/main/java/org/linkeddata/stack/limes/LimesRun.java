@@ -237,7 +237,6 @@ public class LimesRun extends HttpServlet {
     
     // Start LIMES with the configfile
  	public static void executeLimes(String configFile){
- 		System.out.println(configFile);
  		Controller.run(configFile);
  	}
 

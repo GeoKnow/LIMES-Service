@@ -25,6 +25,10 @@
     <servlet-name>LoadFile</servlet-name>
     <servlet-class>org.linkeddata.stack.limes.LoadFile</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ImportRDF</servlet-name>
+    <servlet-class>org.linkeddata.stack.limes.ImportRDF</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>LimeServlet</servlet-name>
     <url-pattern>/</url-pattern>
@@ -40,6 +44,10 @@
   <servlet-mapping>
     <servlet-name>LoadFile</servlet-name>
     <url-pattern>/LoadFile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImportRDF</servlet-name>
+    <url-pattern>/ImportRDF</url-pattern>
   </servlet-mapping>
   
   <filter>

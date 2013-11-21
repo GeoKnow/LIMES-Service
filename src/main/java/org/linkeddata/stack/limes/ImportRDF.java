@@ -36,9 +36,9 @@ public class ImportRDF extends HttpServlet {
 	private String rdfFile;
 	private String endpoint;
 	private static String uriBase;
-	private String graph;
-	private String rdfQuery;
-	private String rdfQueryEndpoint;
+//	private String graph;
+//	private String rdfQuery;
+//	private String rdfQueryEndpoint;
 	private String jobName;
 	private String reviewGraph;
 	private String acceptedGraph;
@@ -59,73 +59,57 @@ public class ImportRDF extends HttpServlet {
 	    ObjectMapper mapper = new ObjectMapper();
 	    
 	    uriBase   = request.getParameter("uriBase");
-		//rdfUrl   = request.getParameter("rdfUrl");
+		rdfUrl   = request.getParameter("rdfUrl");
 		endpoint = request.getParameter("endpoint");
-	    graph    = request.getParameter("graph");
-	    rdfFile = request.getParameter("rdfFile");
+//	    graph    = request.getParameter("graph");
+//	    rdfFile = request.getParameter("rdfFile");
 	    //rdfQuery    = request.getParameter("rdfQuery");
 	    //rdfQueryEndpoint = request.getParameter("rdfQueryEndpoint");
 	    
 	    String review = filePath+"result"+File.separator+"reviewme.nt";
-    	String source = ((rdfFile == null) ? rdfUrl : filePath+"result"+File.separator+rdfFile);
+    	String accepted = filePath+"result"+File.separator+"accepted.nt";
+    	
     	try {
-    		if(source != null){
-    			source = "file:///"+source.replace("\\", "/");
-    			review = "file:///"+review.replace("\\", "/");
- 				System.out.println("import    " +source + " " + review);
- 				
- 				Model modelre = ModelFactory.createDefaultModel() ; 
- 				RDFReader readerre = modelre.getReader("N3");
- 				readerre.read(modelre, review);
- 				
- 				Model model = ModelFactory.createDefaultModel() ; 
- 				RDFReader reader = model.getReader("N3");
- 				reader.read(model, source);
- 				
- 				jobName = "testing";
- 				UUID idReview = UUID.randomUUID();
- 			    UUID idAccepted = UUID.randomUUID();
- 			    reviewGraph = ":"+idReview+"-_-"+jobName+"-review";
- 			    acceptedGraph = ":"+idAccepted+"-_-"+jobName+"-accepted";
- 			    int inserted = 0;
- 			    int insertedre = 0;
- 			    
- 			    if(modelre.isEmpty()!=true){
- 			    	httpCreate(endpoint, reviewGraph);
- 			    	insertedre = httpUpdate(endpoint, reviewGraph , modelre);
- 	 				res.setStatus("SUCCESS");
- 	 				res.addResult(reviewGraph);
- 			    }
- 			    if(modelre.isEmpty()==true){
-	 				res.addResult("empty");
-			    }
- 			    
- 			    if(model.isEmpty()!=true){
- 			    	httpCreate(endpoint, acceptedGraph);
- 			    	inserted = httpUpdate(endpoint, acceptedGraph , model);
- 	 				res.setStatus("SUCCESS");
- 	 				res.addResult(acceptedGraph);
- 			    }
- 			    if(model.isEmpty()==true){
-	 				res.addResult("empty");
-			    }
- 			    
- 			    if(modelre.isEmpty()!=true && model.isEmpty()!=true){
- 			    	res.setMessage("Imported "+inserted+" accepted triples into the graph: "+acceptedGraph+
- 			    			" and "+insertedre+" triples for reviewing into the graph: "+reviewGraph);
- 			    }
- 			    if(modelre.isEmpty()!=true && model.isEmpty()==true){
-			    	res.setMessage("Imported "+insertedre+" triples for reviewing into the graph: "+reviewGraph);
-			    }
- 			    if(modelre.isEmpty()==true && model.isEmpty()!=true){
-			    	res.setMessage("Imported "+inserted+" accepted triples into the graph: "+acceptedGraph);
-			    }
-    		}	  
- 			else{
- 		 	  	int inserted = queryImport(endpoint, graph, rdfQueryEndpoint, rdfQuery);
- 		 	   	res.setStatus("SUCCESS");
- 		 	   	res.setMessage("Data Imported "+ inserted + " triples");
- 		 	}
+    		accepted = "file:///"+accepted.replace("\\", "/");
+			review = "file:///"+review.replace("\\", "/");
+			System.out.println("import    " +accepted + " " + review);
+			
+			Model modelre = ModelFactory.createDefaultModel() ; 
+			RDFReader readerre = modelre.getReader("N3");
+			readerre.read(modelre, review);
+			
+			Model model = ModelFactory.createDefaultModel() ; 
+			RDFReader reader = model.getReader("N3");
+			reader.read(model, accepted);
+			
+			jobName = "LIMES";
+			UUID idReview = UUID.randomUUID();
+		    UUID idAccepted = UUID.randomUUID();
+		    reviewGraph = uriBase +idReview+"-"+jobName+"-review";
+		    acceptedGraph = uriBase +idAccepted+"-"+jobName+"-accepted";
+
+		    String message ="";
+		    
+		   if(model.isEmpty()!=true){
+		    	httpCreate(endpoint, acceptedGraph);
+		    	int inserted = httpUpdate(endpoint, acceptedGraph , model);
+ 				res.setStatus("SUCCESS");
+ 				res.addResult(acceptedGraph);
+ 				message += "Imported "+inserted+" accepted triples into the graph: "+acceptedGraph + "\n";
+		    }
+		   
+		   
+		    if(!modelre.isEmpty()){
+		    	httpCreate(endpoint, reviewGraph);
+		    	int inserted = httpUpdate(endpoint, reviewGraph , modelre);
+ 				res.setStatus("SUCCESS");
+ 				res.addResult(reviewGraph);
+ 				message += "Imported "+inserted+" triples for reviewing into the graph: "+reviewGraph;
+		    }
+		    
+		   res.setMessage(message);
+	
+    	
  		} catch (Exception e) {
 				res.setStatus("FAIL");
 				res.setMessage(e.getMessage());
@@ -242,7 +226,7 @@ public class ImportRDF extends HttpServlet {
      
 	}
 	
-private static void httpCreate(String endpoint, String graph) throws Exception{
+	private static void httpCreate(String endpoint, String graph) throws Exception{
 				
 				ByteArrayOutputStream os = new ByteArrayOutputStream();
 				String queryString = "CREATE GRAPH <" + graph + ">";

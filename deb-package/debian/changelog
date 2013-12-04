@@ -1,0 +1,5 @@
+limes-service (0.1) ldstack-nightly; urgency=low
+
+  * Initial Release.
+
+ -- Vadim Zaslawski <vadim.zaslawski@ontos.com>  Wed, 21 Aug 2013 15:01:15 +0200

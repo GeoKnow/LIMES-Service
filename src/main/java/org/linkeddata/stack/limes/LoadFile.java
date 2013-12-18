@@ -39,7 +39,9 @@ public class LoadFile extends HttpServlet {
     	 response.setHeader("Access-Control-Allow-Origin", "*");
     	 
     	 String filePath = request.getSession().getServletContext().getRealPath("/");
+    	 System.out.println(filePath);
     	 filePath = filePath.replace("Limes-Service"+File.separator, "");
+    	 System.out.println(filePath);
     	 configFile = filePath+"generator"+File.separator+"uploads"+File.separator+request.getParameter("file");
     	 System.out.println("LoadFile: " + configFile);
     	 readConfig(configFile);

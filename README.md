@@ -69,7 +69,7 @@ POST a params array to /LimesRun
 	
 The class will output the results to the webapp/result folder
 	
-####Open the output from the enrichment process
+####Open the output from the linking process
 
 POST a params array to /LimesReview
 

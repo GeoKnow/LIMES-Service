@@ -78,10 +78,20 @@ public class LoadFile extends HttpServlet {
 	    			
 	    			for (int i = 0; i < sourcelist.size(); i++) {
 	    				   Element node = (Element) sourcelist.get(i);
+	    				   if(node.getName() == "ENDPOINT"){
+	    					   sourceArray.add(0, node.getText());
+	    				   }
+	    				   if(node.getName() == "VAR"){
+	    					   sourceArray.add(1, node.getText());
+	    				   }
+	    				   if(node.getName() == "PAGESIZE"){
+	    					   sourceArray.add(2, node.getText());
+	    				   }
+	    				   if(node.getName() == "RESTRICTION"){
+	    					   sourceArray.add(3, node.getText());
+	    				   }
 	    				   if(node.getName() == "PROPERTY"){
 	    					   sourceProps.add(node.getText());
-	    				   }else{
-	    					   sourceArray.add(node.getText());
 	    				   }
 	    				}
 	    			
@@ -90,10 +100,20 @@ public class LoadFile extends HttpServlet {
 	    			
 	    			for (int i = 0; i < targetlist.size(); i++) {
 	    				   Element node = (Element) targetlist.get(i);
+	    				   if(node.getName() == "ENDPOINT"){
+	    					   targetArray.add(0, node.getText());
+	    				   }
+	    				   if(node.getName() == "VAR"){
+	    					   targetArray.add(1, node.getText());
+	    				   }
+	    				   if(node.getName() == "PAGESIZE"){
+	    					   targetArray.add(2, node.getText());
+	    				   }
+	    				   if(node.getName() == "RESTRICTION"){
+	    					   targetArray.add(3, node.getText());
+	    				   }
 	    				   if(node.getName() == "PROPERTY"){
 	    					   targetProps.add(node.getText());
-	    				   }else{
-	    					   targetArray.add(node.getText());
 	    				   }
 	    				}
 	    			

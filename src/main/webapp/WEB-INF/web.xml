@@ -10,7 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>LimeServlet</servlet-name>
+    <servlet-name>Limes-Service</servlet-name>
     <servlet-class>org.linkeddata.stack.limes.LimesRun</servlet-class>
   </servlet>
   <servlet>
@@ -30,7 +30,7 @@
     <servlet-class>org.linkeddata.stack.limes.ImportRDF</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LimeServlet</servlet-name>
+    <servlet-name>Limes-Service</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

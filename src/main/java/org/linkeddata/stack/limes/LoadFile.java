@@ -2,6 +2,7 @@ package org.linkeddata.stack.limes;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.JDOMParseException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.input.sax.XMLReaders;
 
 import com.google.gson.Gson;
 
@@ -29,28 +33,42 @@ public class LoadFile extends HttpServlet {
 	static String outputFormat;
 	static String execType;
 	Object[]config = new Object[10];
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	 
     	 response.setHeader("Access-Control-Allow-Origin", "*");
+    	 Boolean valid = true;
     	 
     	 String filePath = request.getSession().getServletContext().getRealPath("/");
-    	 filePath = filePath.replace("Limes-Service"+File.separator, "");
-    	 configFile = filePath+"generator"+File.separator+"uploads"+File.separator+request.getParameter("file");
+    	 String filePathUpload = filePath.replace("Limes-Service"+File.separator, "");
+    	 configFile = filePathUpload+"generator"+File.separator+"uploads"+File.separator+request.getParameter("file");
+    	 configTemplate = filePath+File.separator+"config"+File.separator+"limes.dtd";
     	 System.out.println("LoadFile: " + configFile);
-    	 readConfig(configFile);
-    	 
-    	 Gson gson = new Gson();
-	     String json = gson.toJson(config);
-	     response.setContentType("application/json");
-	     response.setCharacterEncoding("UTF-8");
-	     response.getWriter().write(json);
+    	 try {
+			validateXML();
+		 } catch (JDOMException e) {
+			 response.setContentType("application/json");
+		     response.setCharacterEncoding("UTF-8");
+		     response.setStatus(500);
+		     response.getWriter().write(e.getMessage());
+		     valid = false;
+		 }
+    	 System.out.println(valid);
+    	 if(valid == true){
+	    	 readConfig(configFile);
+	    	 
+	    	 Gson gson = new Gson();
+		     String json = gson.toJson(config);
+		     response.setContentType("application/json");
+		     response.setCharacterEncoding("UTF-8");
+		     response.getWriter().write(json);
+	    	 }
     	}
     
-    private void readConfig(String configFile){
+    private void readConfig(String configFile) throws IOException{
     	
     	 List<String> sourceArray 		= new ArrayList<String>();
     	 List<String> targetArray 		= new ArrayList<String>();
@@ -63,14 +81,9 @@ public class LoadFile extends HttpServlet {
     	 List<String> acceptanceArray 	= new ArrayList<String>();
     	 List<String> reviewArray 	  	= new ArrayList<String>();
     	 
-    	 SAXBuilder builder = new SAXBuilder();
-    	 builder.setFeature("http://xml.org/sax/features/validation", false);
-    	 builder.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
-    	 builder.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-    	 
     	 try {
-	    			
-	    			Document document = (Document) builder.build(configFile);
+    		 		SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
+    		 		Document document = builder.build(configFile);
 	    			Element rootNode = document.getRootElement();
 	    			
 	    			Element sourceNode = rootNode.getChild("SOURCE");
@@ -154,7 +167,7 @@ public class LoadFile extends HttpServlet {
 		    	} catch (Exception e) {
 		    		e.printStackTrace();
 		    		throw new IllegalArgumentException("Invalid LIMES Configration");
-		    }
+		    		}
     	 
     	 config[0] = sourceArray;
     	 config[1] = targetArray;
@@ -167,6 +180,12 @@ public class LoadFile extends HttpServlet {
     	 config[8] = sourceProps;
     	 config[9] = targetProps;
     	 
+    }
+    
+    public void validateXML() throws JDOMException, IOException{
+    	SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
+    	Document document = builder.build(configFile);
+    	System.out.println(document.getDocType());
     }
     
 }

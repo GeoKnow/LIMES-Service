@@ -127,7 +127,7 @@ public class LimesRun extends HttpServlet {
 			review[2] = request.getParameter("ReviewRelation");
 
 			writeConfig();
-			//executeLimes(configFile);
+			executeLimes(configFile);
 			res.setStatus("SUCCESS");
 			res.setMessage("LIMES process ended succesfully");
 

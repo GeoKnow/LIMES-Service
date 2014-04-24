@@ -186,8 +186,9 @@ public class ImportRDF extends HttpServlet {
 			else{
 				
 				ByteArrayOutputStream os = new ByteArrayOutputStream();
-				tmpModel.write(os, "N-TRIPLES");
-				String queryString = "INSERT {  " + os.toString() + "}";
+				tmpModel.write(os, "TURTLE");
+				String queryString = "INSERT { " + os.toString("UTF-8") + "}";
+				System.out.println(queryString);
 				os.close();
 				
 				HttpSPARQLUpdate p = new HttpSPARQLUpdate();

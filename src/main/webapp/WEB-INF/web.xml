@@ -10,33 +10,17 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>Limes-Service</servlet-name>
-    <servlet-class>org.linkeddata.stack.limes.LimesRun</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>LimesRun</servlet-name>
-    <servlet-class>org.linkeddata.stack.limes.LimesRun</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>LimesReview</servlet-name>
-    <servlet-class>org.linkeddata.stack.limes.LimesReview</servlet-class>
+    <servlet-class>org.linkeddata.stack.limes.api.LimesReview</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LoadFile</servlet-name>
-    <servlet-class>org.linkeddata.stack.limes.LoadFile</servlet-class>
+    <servlet-class>org.linkeddata.stack.limes.api.LoadFile</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ImportRDF</servlet-name>
-    <servlet-class>org.linkeddata.stack.limes.ImportRDF</servlet-class>
+    <servlet-class>org.linkeddata.stack.limes.api.ImportRDF</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>Limes-Service</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>LimesRun</servlet-name>
-    <url-pattern>/LimesRun</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LimesReview</servlet-name>
     <url-pattern>/LimesReview</url-pattern>
@@ -49,6 +33,28 @@
     <servlet-name>ImportRDF</servlet-name>
     <url-pattern>/ImportRDF</url-pattern>
   </servlet-mapping>
+  
+    <!-- Jersey rest services scanning -->
+  <!-- TODO: All servlet mapping will be replaced by this once we change all Servlets 
+    to Javax web services -->
+  <servlet>
+    <servlet-name>api</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <load-on-startup>1</load-on-startup>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>org.linkeddata.stack.limes.api</param-value>
+    </init-param>
+    <init-param>
+      <param-name>jersey.config.server.provider.scanning.recursive</param-name>
+      <param-value>false</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>api</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+  
   <filter>
     <filter-name>CORS</filter-name>
     <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>

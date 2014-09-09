@@ -5,8 +5,8 @@
   <packaging>war</packaging>
   <name>Limes-Service</name>
   <groupId>stack.linkeddata.org</groupId>
-  <artifactId>Limes-Service</artifactId>
-  <version>1.0</version>
+  <artifactId>limes-service</artifactId>
+  <version>1.1</version>
 
   <properties>
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -14,7 +14,7 @@
   </properties>
   
   <build>
-    <finalName>Limes-Service</finalName>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <!-- Maven Tomcat Plugin -->
       <plugin>
@@ -69,12 +69,7 @@
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.hp.hpl.jena</groupId>
-      <artifactId>arq</artifactId>
-      <version>2.8.1</version>
+      <scope>provided</scope>
     </dependency>
     
     <dependency>
@@ -102,7 +97,7 @@
 	</dependency>
     
     <!-- Logging -->
-    <dependency>
+<!--     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.6.0</version>
@@ -115,14 +110,14 @@
       <version>1.6.0</version>
       <type>jar</type>
       <scope>compile</scope>
-    </dependency>
+    </dependency> 
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.14</version>
       <type>jar</type>
       <scope>compile</scope>
-    </dependency>
+    </dependency>-->
     
     <!-- CORS Filter  -->
     <dependency>
@@ -137,6 +132,12 @@
       <version>1.9</version>
     </dependency>
             
+    <!-- Javax web services with jersey -->
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>2.12</version>
+    </dependency>
             
   </dependencies>
 

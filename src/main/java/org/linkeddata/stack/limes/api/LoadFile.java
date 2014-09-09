@@ -1,4 +1,4 @@
-package org.linkeddata.stack.limes;
+package org.linkeddata.stack.limes.api;
 
 import java.io.File;
 import java.io.IOException;

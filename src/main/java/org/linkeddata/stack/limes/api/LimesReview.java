@@ -1,4 +1,4 @@
-package org.linkeddata.stack.limes;
+package org.linkeddata.stack.limes.api;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

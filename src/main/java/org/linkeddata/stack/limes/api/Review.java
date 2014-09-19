@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -74,13 +76,18 @@ public class Review {
 	    }
 	}
 
-	Object[] all = new Object[2];
-
-	all[0] = review.toArray();
-	all[1] = accepted.toArray();
+	// Object[] all = new Object[2];
+	// all[0] = review.toArray();
+	// all[1] = accepted.toArray();
 
 	Gson gson = new Gson();
-	String json = gson.toJson(all);
+
+	Map<String, List> map = new HashMap<String, List>();
+	map.put("review", review);
+	map.put("accepted", accepted);
+	gson.toJson(review.toArray());
+
+	String json = gson.toJson(map);
 
 	return Response.ok(json).header("Access-Control-Allow-Origin", "*")
 		.header("Access-Control-Allow-Methods", "GET").build();

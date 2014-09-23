@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.jws.WebService;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
@@ -31,10 +32,11 @@ import org.linkeddata.stack.limes.LimesConfig;
  * API implementation class LIMESERVE
  */
 
+@WebService
 @Path("/run")
-public class LimesRun {
+public class Run {
 
-    private static final Logger log = Logger.getLogger(LimesRun.class);
+    private static final Logger log = Logger.getLogger(Run.class);
     private static String filePath;
 
     // Options for writing the config file
@@ -48,7 +50,7 @@ public class LimesRun {
      * 
      * @param context
      */
-    public LimesRun(@Context ServletContext context) {
+    public Run(@Context ServletContext context) {
 
 	filePath = context.getRealPath(File.separator);
 	// configFilePath = filePath + "config" + File.separator + "config.xml";

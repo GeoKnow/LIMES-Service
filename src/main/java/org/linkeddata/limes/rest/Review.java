@@ -1,4 +1,4 @@
-package org.linkeddata.stack.limes.api;
+package org.linkeddata.limes.rest;
 
 import java.io.BufferedReader;
 import java.io.File;

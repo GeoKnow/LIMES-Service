@@ -34,11 +34,13 @@ public class LimesMain {
 
 	log.debug(config);
 
-	FileWriter configFile = new FileWriter(config.getConfigurationFile(),
+	FileWriter configFile = new FileWriter(config.getConfigurationfile(),
 		false);
 
 	JAXBContext cont = JAXBContext.newInstance(LimesConfig.class);
 
+	log.debug(LimesMain.class.getClassLoader().getResource("limes.dtd")
+		.getPath());
 	StringWriter writer = new StringWriter();
 	writer.append("<?xml version=\"1.0\"?>");
 	writer.append("<!DOCTYPE LIMES SYSTEM \""
@@ -55,21 +57,20 @@ public class LimesMain {
 	configFile.write(writer.toString());
 	configFile.close();
 
-	log.info("configuration file created: " + config.getConfigurationFile());
-	PPJoinController.run(config.getConfigurationFile());
+	log.info("configuration file created: " + config.getConfigurationfile());
+	PPJoinController.run(config.getConfigurationfile());
     }
 
     public static void saveResults(LimesConfig config) throws Exception {
 
-	log.info("Saving results to " + config.getImportendpoint());
+	log.info("Saving results to " + config.getSaveendpoint());
 
-	if (config.getImportendpoint() == null
-		|| config.getImportendpoint() == "")
+	if (config.getSaveendpoint() == null || config.getSaveendpoint() == "")
 	    throw new NullPointerException(
 		    "Undefined endpoint for saving results");
 
-	String reviewFile = config.getReview().getReviewfilepath();
-	String acceptedFile = config.getAcceptance().getAcceptancefilepath();
+	String reviewFile = config.getReview().getFile();
+	String acceptedFile = config.getAcceptance().getFile();
 
 	// read the file created with the first output format
 	Model modelReview = ModelFactory.createDefaultModel();
@@ -84,11 +85,11 @@ public class LimesMain {
 		.toString());
 
 	if (modelAccepted.isEmpty() != true)
-	    insertResults(config.getImportendpoint(), config.getAcceptgraph(),
+	    insertResults(config.getSaveendpoint(), config.getAcceptgraph(),
 		    config.getUribase(), modelAccepted);
 
 	if (!modelReview.isEmpty())
-	    insertResults(config.getImportendpoint(), config.getReviewgraph(),
+	    insertResults(config.getSaveendpoint(), config.getReviewgraph(),
 		    config.getUribase(), modelReview);
 
     }

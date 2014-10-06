@@ -76,10 +76,6 @@ public class Review {
 	    }
 	}
 
-	// Object[] all = new Object[2];
-	// all[0] = review.toArray();
-	// all[1] = accepted.toArray();
-
 	Gson gson = new Gson();
 
 	Map<String, List> map = new HashMap<String, List>();

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlType(propOrder = { "id", "endpoint", "graph", "var", "pagesize",
 	"restriction", "property", "type" })
 public class Dataset {
@@ -19,6 +21,7 @@ public class Dataset {
     private String type;
 
     @XmlElement(name = "ID")
+    @JsonProperty("id")
     public String getId() {
 	return id;
     }
@@ -28,6 +31,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "ENDPOINT")
+    @JsonProperty("endpoint")
     public String getEndpoint() {
 	return endpoint;
     }
@@ -37,6 +41,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "GRAPH")
+    @JsonProperty("graph")
     public List<String> getGraph() {
 	return graph;
     }
@@ -46,6 +51,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "VAR")
+    @JsonProperty("var")
     public String getVar() {
 	return var;
     }
@@ -55,6 +61,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "PAGESIZE")
+    @JsonProperty("pagesize")
     public String getPagesize() {
 	return pagesize;
     }
@@ -64,6 +71,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "RESTRICTION")
+    @JsonProperty("restriction")
     public String getRestriction() {
 	return restriction;
     }
@@ -73,6 +81,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "PROPERTY")
+    @JsonProperty("property")
     public List<String> getProperty() {
 	return property;
     }
@@ -82,6 +91,7 @@ public class Dataset {
     }
 
     @XmlElement(name = "TYPE")
+    @JsonProperty("type")
     public String getType() {
 	return type;
     }

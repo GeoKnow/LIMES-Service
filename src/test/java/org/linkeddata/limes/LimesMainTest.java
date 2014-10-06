@@ -61,11 +61,10 @@ public class LimesMainTest {
 	LimesConfig config = unmarshaller.unmarshal(varElement,
 		LimesConfig.class).getValue();
 
-	config.setConfigurationFile(configFile);
-	config.getAcceptance().setAcceptancefilepath(acceptedFile);
-	config.getReview().setReviewfilepath(reviewFile);
-	config.getOutputformat().clear();
-	config.getOutputformat().add(outputFormat);
+	config.setConfigurationfile(configFile);
+	config.getAcceptance().setFile(acceptedFile);
+	config.getReview().setFile(reviewFile);
+	config.setOutput(outputFormat);
 
 	LimesMain.executeLimes(config);
 
@@ -73,12 +72,12 @@ public class LimesMainTest {
 
 	assertNotSame(0, resfile.length());
 
-	config.setImportendpoint(endpointImport);
-	config.setUribase(uriBase);
-	config.setAcceptgraph(acceptGraph);
-	config.setReviewgraph(reviewGraph);
+	// config.setSaveendpoint(endpointImport);
+	// config.setUribase(uriBase);
+	// config.setAcceptgraph(acceptGraph);
+	// config.setReviewgraph(reviewGraph);
 
-	LimesMain.saveResults(config);
+	// LimesMain.saveResults(config);
 
     }
 

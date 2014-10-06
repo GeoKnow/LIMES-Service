@@ -8,35 +8,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @XmlRootElement(name = "LIMES")
-@XmlType(propOrder = { "prefixes", "source", "target", "metric", "acceptance",
-	"review", "exectype", "granularity", "outputformat" })
+@XmlType(propOrder = { "prefix", "source", "target", "metric", "acceptance",
+	"review", "execution", "granularity", "output" })
 public class LimesConfig {
 
     private String uuid = "";
     private String metric = "";
     private Dataset source;
     private Dataset target;
-    private Acceptance acceptance;
-    private Review review;
-    private List<Prefix> prefixes;
-    private List<String> exectype;
-    private List<String> granularity;
-    private List<String> outputformat;
+    private Result acceptance;
+    private Result review;
+    private String execution;
+    private String granularity;
+    private String output;
+    private List<Prefix> prefix;
 
     // following fields are for Application logic and should be omitted in the
     // limes xml file configuration
     private String configurationfile = "";
-    private String importendpoint = "";
+    private String saveendpoint = "";
     private String reviewgraph = "";
     private String acceptgraph = "";
     private String uribase = "";
 
     public LimesConfig() {
-	setPrefixes(new ArrayList<Prefix>());
+	setPrefix(new ArrayList<Prefix>());
     }
 
     @Override
@@ -47,15 +48,7 @@ public class LimesConfig {
     }
 
     @XmlTransient
-    public String getConfigurationFile() {
-	return configurationfile;
-    }
-
-    public void setConfigurationFile(String configurationfile) {
-	this.configurationfile = configurationfile;
-    }
-
-    @XmlTransient
+    @JsonProperty("configurationfile")
     public String getConfigurationfile() {
 	return configurationfile;
     }
@@ -65,15 +58,17 @@ public class LimesConfig {
     }
 
     @XmlTransient
-    public String getImportendpoint() {
-	return importendpoint;
+    @JsonProperty("saveendpoint")
+    public String getSaveendpoint() {
+	return saveendpoint;
     }
 
-    public void setImportendpoint(String importendpoint) {
-	this.importendpoint = importendpoint;
+    public void setSaveendpoint(String saveendpoint) {
+	this.saveendpoint = saveendpoint;
     }
 
     @XmlTransient
+    @JsonProperty("reviewgraph")
     public String getReviewgraph() {
 	return reviewgraph;
     }
@@ -83,6 +78,7 @@ public class LimesConfig {
     }
 
     @XmlTransient
+    @JsonProperty("acceptgraph")
     public String getAcceptgraph() {
 	return acceptgraph;
     }
@@ -92,6 +88,7 @@ public class LimesConfig {
     }
 
     @XmlTransient
+    @JsonProperty("uribase")
     public String getUribase() {
 	return uribase;
     }
@@ -101,6 +98,7 @@ public class LimesConfig {
     }
 
     @XmlTransient
+    @JsonProperty("uuid")
     public String getUuid() {
 	return uuid;
     }
@@ -110,6 +108,7 @@ public class LimesConfig {
     }
 
     @XmlElement(name = "METRIC")
+    @JsonProperty("metric")
     public String getMetric() {
 	return metric;
     }
@@ -119,42 +118,47 @@ public class LimesConfig {
     }
 
     @XmlElement(name = "GRANULARITY")
-    public List<String> getGranularity() {
+    @JsonProperty("granularity")
+    public String getGranularity() {
 	return granularity;
     }
 
-    public void setGranularity(List<String> granularity) {
+    public void setGranularity(String granularity) {
 	this.granularity = granularity;
     }
 
     @XmlElement(name = "OUTPUT")
-    public List<String> getOutputformat() {
-	return outputformat;
+    @JsonProperty("output")
+    public String getOutput() {
+	return output;
     }
 
-    public void setOutputformat(List<String> outputformat) {
-	this.outputformat = outputformat;
+    public void setOutput(String output) {
+	this.output = output;
     }
 
     @XmlElement(name = "EXECUTION")
-    public List<String> getExectype() {
-	return exectype;
+    @JsonProperty("execution")
+    public String getExecution() {
+	return execution;
     }
 
-    public void setExectype(List<String> exectype) {
-	this.exectype = exectype;
+    public void setExecution(String execution) {
+	this.execution = execution;
     }
 
     @XmlElement(name = "PREFIX")
-    public List<Prefix> getPrefixes() {
-	return prefixes;
+    @JsonProperty("prefix")
+    public List<Prefix> getPrefix() {
+	return prefix;
     }
 
-    public void setPrefixes(List<Prefix> prefixes) {
-	this.prefixes = prefixes;
+    public void setPrefix(List<Prefix> prefix) {
+	this.prefix = prefix;
     }
 
     @XmlElement(name = "SOURCE")
+    @JsonProperty("source")
     public Dataset getSource() {
 	return source;
     }
@@ -164,6 +168,7 @@ public class LimesConfig {
     }
 
     @XmlElement(name = "TARGET")
+    @JsonProperty("target")
     public Dataset getTarget() {
 	return target;
     }
@@ -173,20 +178,22 @@ public class LimesConfig {
     }
 
     @XmlElement(name = "ACCEPTANCE")
-    public Acceptance getAcceptance() {
+    @JsonProperty("acceptance")
+    public Result getAcceptance() {
 	return acceptance;
     }
 
-    public void setAcceptance(Acceptance acceptance) {
+    public void setAcceptance(Result acceptance) {
 	this.acceptance = acceptance;
     }
 
     @XmlElement(name = "REVIEW")
-    public Review getReview() {
+    @JsonProperty("review")
+    public Result getReview() {
 	return review;
     }
 
-    public void setReview(Review review) {
+    public void setReview(Result review) {
 	this.review = review;
     }
 

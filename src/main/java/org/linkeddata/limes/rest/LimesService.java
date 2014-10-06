@@ -27,7 +27,6 @@ public class LimesService {
     private static final Logger log = Logger.getLogger(LimesService.class);
 
     private String workingPath;
-    private String outputformat = "N3";
 
     @Context
     ServletContext context;
@@ -56,20 +55,24 @@ public class LimesService {
 
 	try {
 	    String uuid = UUID.randomUUID().toString();
-
 	    config.setUuid(uuid);
-	    config.getOutputformat().clear();
-	    // only ttl
-	    config.getOutputformat().add(outputformat.toUpperCase());
-
-	    config.setConfigurationFile(workingPath + File.separator + uuid
+	    config.setConfigurationfile(workingPath + File.separator + uuid
 		    + "_config.xml");
-	    config.getAcceptance().setAcceptancefilepath(
-		    workingPath + File.separator + uuid + "_accepted.n3");
-	    config.getReview().setReviewfilepath(
-		    workingPath + File.separator + uuid + "_review.n3");
+	    config.getAcceptance().setFile(
+		    workingPath + File.separator + uuid + "_accepted."
+			    + config.getOutput().toLowerCase());
+	    config.getReview().setFile(
+		    workingPath + File.separator + uuid + "_review."
+			    + config.getOutput().toLowerCase());
 
 	    LimesMain.executeLimes(config);
+
+	    // if the output format is RDF (not TAB),
+	    // and the save endpoint is not empty
+	    // save results in the save endpoint
+	    if (config.getOutput() != "TAB"
+		    && !config.getSaveendpoint().equals(""))
+		LimesMain.saveResults(config);
 
 	    return Response.status(Response.Status.CREATED)
 		    .header("Access-Control-Allow-Origin", "*")
@@ -85,5 +88,4 @@ public class LimesService {
 		    .build();
 	}
     }
-
 }

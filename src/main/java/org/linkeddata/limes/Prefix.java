@@ -3,6 +3,8 @@ package org.linkeddata.limes;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlType(propOrder = { "namespace", "label" })
 public class Prefix {
 
@@ -10,6 +12,7 @@ public class Prefix {
     private String namespace;
 
     @XmlElement(name = "NAMESPACE")
+    @JsonProperty("namespace")
     public String getNamespace() {
 	return namespace;
     }
@@ -19,6 +22,7 @@ public class Prefix {
     }
 
     @XmlElement(name = "LABEL")
+    @JsonProperty("label")
     public String getLabel() {
 	return label;
     }

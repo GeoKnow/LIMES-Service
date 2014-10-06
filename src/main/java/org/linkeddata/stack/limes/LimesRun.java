@@ -45,7 +45,9 @@ public class LimesRun extends HttpServlet {
 		"http://dbpedia.org/property/", "dbpedia2", "http://www.w3.org/2004/02/skos/core#", "skos",
 		"http://wiktionary.dbpedia.org/terms/", "wktrm", "http://lexvo.org/ontology#", "lexvo",
 		"http://dbpedia.org/ontology/", "dbpedia-owl", "http://ld.geoknow.eu/flights/ontology/", "ld",
-		"http://purl.org/acco/ns#", "cco", "http://www.w3.org/2003/01/geo/wgs84_pos#", "geo"};
+		"http://purl.org/acco/ns#", "cco", "http://www.w3.org/2003/01/geo/wgs84_pos#", "geo",
+		"http://data.admin.ch/vocab/", "gz", "http://www.ontos.com/ch/", "on",
+		"http://data.admin.ch/bfs/class/1.0/", "gzp"};
 
 	static List<String> source = new ArrayList<String>();
 	static List<String> target = new ArrayList<String>();
@@ -120,11 +122,11 @@ public class LimesRun extends HttpServlet {
 			outputFormat = request.getParameter("OutputFormat");
 			execType = request.getParameter("ExecType");
 			acceptance[0] = request.getParameter("AcceptThresh");
-			review[0] = request.getParameter("ReviewThresh");
-			acceptance[1] = filePath+"result/accepted.nt";
-			review[1] = filePath+"result/reviewme.nt";
+			review[0] = request.getParameter("AcceptThresh");
+			acceptance[1] = filePath+"result"+File.separator+"accepted.nt";
+			review[1] = filePath+"result"+File.separator+"reviewme.nt";
 			acceptance[2] = request.getParameter("AcceptRelation");
-			review[2] = request.getParameter("ReviewRelation");
+			review[2] = request.getParameter("AcceptRelation");
 
 			writeConfig();
 			executeLimes(configFile);
@@ -274,10 +276,10 @@ public class LimesRun extends HttpServlet {
 	// Start LIMES with the configfile
 	public static void executeLimes(String configFile) throws IOException{
 		
-		System.out.println("java -jar "+filePath+"WEB-INF"+File.separator+
- 				"lib"+File.separator+"limes-0.6.5.jar "+configFile);
- 		Process proc = Runtime.getRuntime().exec("java -jar "+filePath+"WEB-INF"+File.separator+
- 				"lib"+File.separator+"limes-0.6.5.jar "+configFile);
+		System.out.println("java -jar \""+filePath+"WEB-INF"+File.separator+
+ 				"lib"+File.separator+"limes-0.6.5.jar\" \""+configFile+"\"");
+ 		Process proc = Runtime.getRuntime().exec("java -jar \""+filePath+"WEB-INF"+File.separator+
+ 				"lib"+File.separator+"limes-0.6.5.jar\" \""+configFile+"\"");
  		InputStream in = proc.getInputStream();
 	 	InputStream err = proc.getErrorStream();
 	 	String line;

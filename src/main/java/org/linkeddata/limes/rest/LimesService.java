@@ -33,7 +33,7 @@ public class LimesService {
 
     @GET
     public Response sayHello() {
-	return Response.ok("hello", MediaType.TEXT_PLAIN).build();
+        return Response.ok("hello", MediaType.TEXT_PLAIN).build();
     }
 
     @POST
@@ -41,51 +41,46 @@ public class LimesService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response run(LimesConfig config) {
 
-	// TODO: verify what parameters are mandatory
+        // TODO: verify what parameters are mandatory
 
-	String filePath = context.getRealPath(File.separator);
-	log.info("context directory: " + filePath);
+        String filePath = context.getRealPath(File.separator);
+        log.info("context directory: " + filePath);
 
-	workingPath = filePath + "results";
+        workingPath = filePath + "results";
 
-	File resultDir = new File(workingPath);
-	if (!resultDir.exists()) {
-	    resultDir.mkdirs();
-	}
+        File resultDir = new File(workingPath);
+        if (!resultDir.exists()) {
+            resultDir.mkdirs();
+        }
 
-	try {
-	    String uuid = UUID.randomUUID().toString();
-	    config.setUuid(uuid);
-	    config.setConfigurationfile(workingPath + File.separator + uuid
-		    + "_config.xml");
-	    config.getAcceptance().setFile(
-		    workingPath + File.separator + uuid + "_accepted."
-			    + config.getOutput().toLowerCase());
-	    config.getReview().setFile(
-		    workingPath + File.separator + uuid + "_review."
-			    + config.getOutput().toLowerCase());
+        try {
+            String uuid = UUID.randomUUID().toString();
+            config.setUuid(uuid);
+            config.setConfigurationfile(workingPath + File.separator + uuid + "_config.xml");
+            config.getAcceptance().setFile(
+                    workingPath + File.separator + uuid + "_accepted."
+                            + config.getOutput().toLowerCase());
+            config.getReview().setFile(
+                    workingPath + File.separator + uuid + "_review."
+                            + config.getOutput().toLowerCase());
 
-	    LimesMain.executeLimes(config);
+            LimesMain.executeLimes(config);
 
-	    // if the output format is RDF (not TAB),
-	    // and the save endpoint is not empty
-	    // save results in the save endpoint
-	    if (config.getOutput() != "TAB"
-		    && !config.getSaveendpoint().equals(""))
-		LimesMain.saveResults(config);
+            // if the output format is RDF (not TAB),
+            // and the save endpoint is not empty
+            // save results in the save endpoint
+            if (config.getOutput() != "TAB" && !config.getSaveendpoint().equals(""))
+                LimesMain.saveResults(config);
 
-	    return Response.status(Response.Status.CREATED)
-		    .header("Access-Control-Allow-Origin", "*")
-		    .header("Access-Control-Allow-Methods", "POST")
-		    .type(MediaType.APPLICATION_JSON).entity(config.toString())
-		    .build();
+            return Response.status(Response.Status.CREATED).header("Access-Control-Allow-Origin",
+                    "*").header("Access-Control-Allow-Methods", "POST").type(
+                    MediaType.APPLICATION_JSON).entity(config.toString()).build();
 
-	} catch (Exception e) {
-	    log.error(e);
-	    e.printStackTrace();
-	    return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-		    .type(MediaType.APPLICATION_JSON).entity(e.getMessage())
-		    .build();
-	}
+        } catch (Exception e) {
+            log.error(e);
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(
+                    MediaType.APPLICATION_JSON).entity(e.getMessage()).build();
+        }
     }
 }

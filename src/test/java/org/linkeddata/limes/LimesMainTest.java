@@ -45,50 +45,49 @@ public class LimesMainTest {
     @Test
     public void testLimesMain() throws Exception {
 
-	// reads a configuration file from resources
-	log.info("testPostXML " + configurationFileTest);
+        // reads a configuration file from resources
+        log.info("testPostXML " + configurationFileTest);
 
-	ClassLoader classLoader = getClass().getClassLoader();
-	File file = new File(classLoader.getResource(configurationFileTest)
-		.getFile());
-	InputStream is = new FileInputStream(file);
-	DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance()
-		.newDocumentBuilder();
-	Document document = docBuilder.parse(is);
-	Element varElement = document.getDocumentElement();
-	JAXBContext context = JAXBContext.newInstance(LimesConfig.class);
-	Unmarshaller unmarshaller = context.createUnmarshaller();
-	LimesConfig config = unmarshaller.unmarshal(varElement,
-		LimesConfig.class).getValue();
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(configurationFileTest).getFile());
+        InputStream is = new FileInputStream(file);
+        DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = docBuilder.parse(is);
+        Element varElement = document.getDocumentElement();
+        JAXBContext context = JAXBContext.newInstance(LimesConfig.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        LimesConfig config = unmarshaller.unmarshal(varElement, LimesConfig.class).getValue();
 
-	config.setConfigurationfile(configFile);
-	config.getAcceptance().setFile(acceptedFile);
-	config.getReview().setFile(reviewFile);
-	config.setOutput(outputFormat);
+        config.setConfigurationfile(configFile);
+        config.getAcceptance().setFile(acceptedFile);
+        config.getReview().setFile(reviewFile);
+        config.setOutput(outputFormat);
 
-	LimesMain.executeLimes(config);
+        LimesMain.executeLimes(config);
 
-	File resfile = new File(acceptedFile);
+        log.info(config.toString());
 
-	assertNotSame(0, resfile.length());
+        File resfile = new File(acceptedFile);
 
-	// config.setSaveendpoint(endpointImport);
-	// config.setUribase(uriBase);
-	// config.setAcceptgraph(acceptGraph);
-	// config.setReviewgraph(reviewGraph);
+        assertNotSame(0, resfile.length());
 
-	// LimesMain.saveResults(config);
+        config.setSaveendpoint(endpointImport);
+        config.setUribase(uriBase);
+        config.setAcceptgraph(acceptGraph);
+        config.setReviewgraph(reviewGraph);
+
+        LimesMain.saveResults(config);
 
     }
 
     @After
     public void deleteOutputFile() {
-	// delete testing and temporal files
-	(new File(configFile)).delete();
-	(new File(logFile)).delete();
-	(new File(reviewFile)).delete();
-	(new File(acceptedFile)).delete();
-	Files.removeRecursive(new File("cache"));
+        // delete testing and temporal files
+        (new File(configFile)).delete();
+        (new File(logFile)).delete();
+        (new File(reviewFile)).delete();
+        (new File(acceptedFile)).delete();
+        Files.removeRecursive(new File("cache"));
 
     }
 }

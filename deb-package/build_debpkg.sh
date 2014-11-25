@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MODULE_NAME=limes-service_0.1
+MODULE_NAME=limes-service_0.5
 
 echo "Building Debian package for ${MODULE_NAME}"
 rm -rf ../target/debian

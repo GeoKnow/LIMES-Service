@@ -1,6 +1,6 @@
 #LIMES-Service
 
-A web service for [LIMES])(http://aksw.org/Projects/LIMES.html): LInk discovery framework for MEtric Spaces.
+A web service for [LIMES](http://aksw.org/Projects/LIMES.html): LInk discovery framework for MEtric Spaces.
 
 This Project implemented LIMES and provides a REST API for discovering LINKS in the Web of Data. 
 

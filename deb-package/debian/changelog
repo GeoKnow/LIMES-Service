@@ -1,5 +1,6 @@
-limes-service (0.1) ldstack-nightly; urgency=low
+limes-service (0.5) ldstack-nightly; urgency=low
 
-  * Initial Release.
+  * Adapted code for REST API using jax-rs libraries
+  * Support to accept XML and JSON formats for processing LIMES 
 
- -- Vadim Zaslawski <vadim.zaslawski@ontos.com>  Wed, 21 Aug 2013 15:01:15 +0200
+ -- Alejandra Garcia Rojas <alejandra.garciarojas@ontos.com>  Tue, 25 Nov 2014 17:11:12 +0200

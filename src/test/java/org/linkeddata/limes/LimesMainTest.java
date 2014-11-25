@@ -29,9 +29,9 @@ public class LimesMainTest {
     private String reviewFile = "test_reviewe.n3";
     private String logFile = "test_config.log";
 
-    private String endpointImport = "http://192.168.2.13:8890/sparql";
-    private String acceptGraph = "http://ontos.com/resource/accept";
-    private String reviewGraph = "http://ontos.com/resource/review";
+    private String endpointImport = "http://localhost:8080/generator/rest/session/28f53266-7efd-44d4-bc83-cfd1df51bb14";
+    private String acceptGraph = "http://generator.geoknow.eu/resource/LimesJob_1416924194991_accepted";
+    private String reviewGraph = "http://generator.geoknow.eu/resource/LimesJob_1416924194991_review";
     private String uriBase = "http://ontos.com/resource/";
     private String configurationFileTest = "lgd-lgd.xml";
 

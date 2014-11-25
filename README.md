@@ -24,9 +24,10 @@ To avoid running tests use `-DskipTests` parameter.
 ##REST Services
 
 Path     | Method |  Accept | Produces| Description
--------  | ------ | ----------- | ------------
+-------  | ------ | --------| ------- | -----------
 \        | POST   | application/xml application/json | application/json | executes a LIMES with configuration passed in the payload
 \\{uuid} | GET    |  |  | Reads the content of a TAB file generated in the LIMES process
+
 
 ### XML Congiguration
 

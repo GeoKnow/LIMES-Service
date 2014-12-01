@@ -71,12 +71,12 @@ public class LimesMainTest {
 
         assertNotSame(0, resfile.length());
 
-        config.setSaveendpoint(endpointImport);
-        config.setUribase(uriBase);
-        config.setAcceptgraph(acceptGraph);
-        config.setReviewgraph(reviewGraph);
+        // config.setSaveendpoint(endpointImport);
+        // config.setUribase(uriBase);
+        // config.setAcceptgraph(acceptGraph);
+        // config.setReviewgraph(reviewGraph);
 
-        LimesMain.saveResults(config);
+        // LimesMain.saveResults(config);
 
     }
 

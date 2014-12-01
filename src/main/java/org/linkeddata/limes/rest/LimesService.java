@@ -43,7 +43,9 @@ public class LimesService {
 
     @GET
     public Response sayHello() {
-        return Response.ok("hello", MediaType.TEXT_PLAIN).build();
+        return Response.ok("hello", MediaType.TEXT_PLAIN)
+                .header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods",
+                        "GET").build();
     }
 
     @GET
@@ -156,7 +158,9 @@ public class LimesService {
             log.error(e);
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(
-                    MediaType.APPLICATION_JSON).entity(e.getMessage()).build();
+                    MediaType.APPLICATION_JSON).entity(e.getMessage()).header(
+                    "Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods",
+                    "POST").build();
         }
     }
 }

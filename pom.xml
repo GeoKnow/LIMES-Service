@@ -7,7 +7,7 @@
 	<name>Limes-Service</name>
 	<groupId>stack.linkeddata.org</groupId>
 	<artifactId>limes-service</artifactId>
-	<version>0.5</version>
+	<version>0.5.1</version>
 
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

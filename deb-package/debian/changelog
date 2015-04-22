@@ -1,3 +1,10 @@
+limes-service (0.5.1) ldstack-nightly; urgency=low
+
+  * Added GET REST call for retriving executed jobs configurations
+
+ -- Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>  Wed, 22 Apr 2015 09:13:03 +0200
+
+
 limes-service (0.5) ldstack-nightly; urgency=low
   [AGRM]
   * Adapted code for REST API using jax-rs libraries

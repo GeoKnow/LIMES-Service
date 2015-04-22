@@ -1,16 +1,18 @@
 Source: limes-service
-Section: web
-Priority: extra
+Section: unknown
+Priority: optional
 Maintainer: Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
 Homepage: https://github.com/GeoKnow/LIMES-Service
+Vcs-Git: git@github.com:GeoKnow/LIMES-Service.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/limes-service.git;a=summary
 
 Package: limes-service
 Architecture: all
-Depends: tomcat7, ${misc:Depends}
+Depends: tomcat7,${misc:Depends}
 Description: A web service for [LIMES])
   (http://aksw.org/Projects/LIMES.html): LInk discovery 
   framework for MEtric Spaces.
   This Project implemented LIMES and provides a REST API 
-  for discovering LINKS in the Web of Data. 
+  for discovering LINKS in the Web of Data.

@@ -1,34 +1,14 @@
-<<<<<<< HEAD:src/deb/control/control
 Package: limes-service
 Version: 0.5.2
 Section: web
 Priority: optional
 Architecture: all
 Depends: tomcat7
-=======
-Source: limes-service
-Section: unknown
-Priority: optional
->>>>>>> 2705572c2ce0d387c7d6ecc72fc15389b4d5cfda:deb-package/debian/control
 Maintainer: Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>
 Distribution: development
 Homepage: https://github.com/GeoKnow/LIMES-Service
-<<<<<<< HEAD:src/deb/control/control
 Description: A web service for LIMES
   (http://aksw.org/Projects/LIMES.html): LInk discovery 
   framework for MEtric Spaces.
   This Project implemented LIMES and provides a REST API 
   for discovering LINKS in the Web of Data.
-=======
-Vcs-Git: git@github.com:GeoKnow/LIMES-Service.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/limes-service.git;a=summary
-
-Package: limes-service
-Architecture: all
-Depends: tomcat7,${misc:Depends}
-Description: A web service for [LIMES])
-  (http://aksw.org/Projects/LIMES.html): LInk discovery 
-  framework for MEtric Spaces.
-  This Project implemented LIMES and provides a REST API 
-  for discovering LINKS in the Web of Data.
->>>>>>> 2705572c2ce0d387c7d6ecc72fc15389b4d5cfda:deb-package/debian/control

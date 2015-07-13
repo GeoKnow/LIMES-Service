@@ -7,7 +7,7 @@
 	<name>Limes-Service</name>
 	<groupId>stack.linkeddata.org</groupId>
 	<artifactId>limes-service</artifactId>
-	<version>0.5</version>
+	<version>0.5.2</version>
 
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -63,6 +63,34 @@
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
+			</plugin>
+			<!-- For the debian packaging -->
+			<plugin>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jdeb</goal>
+						</goals>
+						<configuration>
+							<deb>${project.build.directory}/${project.build.finalName}_${project.version}_all.deb</deb>
+							<changesOut>${project.build.directory}/${project.build.finalName}_${project.version}_all.changes</changesOut>
+							<dataSet>
+								<data>
+									<src>${project.build.directory}/${project.build.finalName}.war</src>
+									<type>file</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/var/lib/tomcat7/webapps</prefix>
+									</mapper>
+								</data>
+							</dataSet>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -137,35 +165,11 @@
 
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>deb-pkg</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<configuration>
-							<tasks>
-								<echo message="Creating debian package">
-								</echo>
-								<exec dir="${basedir}/deb-package" executable="${basedir}/deb-package/build_debpkg.sh"
-									failonerror="true">
-								</exec>
-							</tasks>
-						</configuration>
-						<executions>
-							<execution>
-								<id>deb-pkg</id>
-								<phase>package</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+	<!-- <profiles> <profile> <id>deb-pkg</id> <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-antrun-plugin</artifactId> <configuration> <tasks> <echo 
+		message="Creating debian package"> </echo> <exec dir="${basedir}/deb-package" 
+		executable="${basedir}/deb-package/build_debpkg.sh" failonerror="true"> </exec> 
+		</tasks> </configuration> <executions> <execution> <id>deb-pkg</id> <phase>package</phase> 
+		<goals> <goal>run</goal> </goals> </execution> </executions> </plugin> </plugins> 
+		</build> </profile> </profiles> -->
 </project>

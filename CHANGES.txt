@@ -1,0 +1,9 @@
+release date=16:13 13.07.2015,version=0.5.2,urgency=low,by=Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>,distribution=ldstack-nightly
+ * Change the debian packaging to use jdeb
+release date=09:13 22.04.2015,version=0.5.1,urgency=low,by=Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>,distribution=ldstack-nightly
+ * Added GET REST call for retrieving executed jobs configurations
+release date=17:11 25.11.2014,version=0.5.0,urgency=low,by=Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>,distribution=ldstack-nightly
+ * Adapted code for REST API using jax-rs libraries
+ * Support to accept XML and JSON formats for processing LIMES 
+release date=13:33 13.12.2013,version=0.1.0,urgency=low,by=Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>,distribution=ldstack-nightly
+ * First version

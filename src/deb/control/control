@@ -5,7 +5,7 @@ Priority: optional
 Architecture: all
 Depends: tomcat7
 Maintainer: Alejandra Garcia-Rojas M <alejandra.garciarojas@ontos.com>
-Distribution: development
+Distribution: ldstack-nightly
 Homepage: https://github.com/GeoKnow/LIMES-Service
 Description: A web service for LIMES
   (http://aksw.org/Projects/LIMES.html): LInk discovery 

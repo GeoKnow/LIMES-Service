@@ -72,6 +72,7 @@
 				<executions>
 					<execution>
 						<phase>package</phase>
+
 						<goals>
 							<goal>jdeb</goal>
 						</goals>
@@ -88,6 +89,9 @@
 									</mapper>
 								</data>
 							</dataSet>
+							<signPackage>true</signPackage>
+							<signMethod>dpkg-sig</signMethod>
+							<signRole>builder</signRole>
 						</configuration>
 					</execution>
 				</executions>
